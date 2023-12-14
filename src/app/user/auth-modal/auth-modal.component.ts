@@ -8,7 +8,7 @@ import { TabsContainerComponent } from '../../shared/tabs-container/tabs-contain
 @Component({
   selector: 'app-auth-modal',
   standalone: true,
-  imports: [ModalComponent, TabsContainerComponent, TabComponent],
+  imports: [ModalComponent, TabsContainerComponent, TabComponent ],
   templateUrl: './auth-modal.component.html',
   styleUrl: './auth-modal.component.css'
 })
