@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { CommonModule, DOCUMENT } from '@angular/common';
+import { Component, Input, Inject, ElementRef } from '@angular/core';
 import { ModalService } from '../../services/modal.service';
 
 @Component({
@@ -13,8 +13,15 @@ import { ModalService } from '../../services/modal.service';
 export class ModalComponent {
   @Input() modalID = ''
 
-  constructor(public modal: ModalService) {
-    // console.log(this.modal.visible
+  constructor(
+    public modal: ModalService,
+    public el: ElementRef
+  ) { 
+    
+  }
+
+  ngOnInit(): void {
+    document.body.appendChild(this.el.nativeElement)
   }
 
   closeModal() {

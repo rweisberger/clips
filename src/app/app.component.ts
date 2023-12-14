@@ -20,16 +20,5 @@ import { ModalService } from './services/modal.service';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  showModal = true
 
-  constructor(public modal: ModalService){
-  }
-
-  ngOnInit() {
-  //   setInterval(() => {
-  //     this.showModal = !this.showModal 
-  //     console.log(this.modal.modals)
-  //   },
-  //   1000)
-  }
 }
