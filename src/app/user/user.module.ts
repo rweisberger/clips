@@ -13,6 +13,6 @@ import { SharedModule } from '../shared/shared.module';
     ReactiveFormsModule,
   ],
   exports: [
-  ]
+  ],
 })
 export class UserModule { }
