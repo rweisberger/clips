@@ -12,8 +12,8 @@ export class AlertComponent {
   @Input() color = 'blue'
 
   // we are adding the get keyword because it is a getter property- we don't want to directly access the color, just modify it
+  // getters return modified properties
   get bgColor() {
-    console.log('bg-${this.color}-400')
     return `bg-${this.color}-400`
   }
 }

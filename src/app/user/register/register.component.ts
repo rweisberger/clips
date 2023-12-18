@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 
+// the register component is built as a reactive form
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -46,6 +47,7 @@ export class RegisterComponent {
     ]),
   })
   register() {
+    // reset the values
     this.showAlert = true 
     this.alertMessage = 'Please wait - your account is being created!'
     this.alertColor = 'blue'
