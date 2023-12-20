@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
-import { AngularFireAuth } from '@angular/fire/compat/auth'
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AuthService } from '../../services/auth.service';
+import IUser from '../../models/user.model';
 
 // the register component is built as a reactive form
 @Component({
@@ -16,9 +16,9 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 export class RegisterComponent {
   constructor(
-    private db: AngularFirestore,
-    private auth: AngularFireAuth
-    ) {}
+    private auth: AuthService
+    ) {  
+    }
   inSubmission = false
 
   showAlert = false
@@ -36,7 +36,7 @@ export class RegisterComponent {
       Validators.email
     ]
     ),
-    age: new FormControl('', [
+    age: new FormControl<number | null>(null, [
       Validators.required,
       Validators.min(18),
       Validators.max(120)
@@ -62,17 +62,9 @@ export class RegisterComponent {
     this.alertColor = 'blue'
     this.inSubmission = true
       
-    const { email, password } = this.registerForm.value
     try {
-      const userCred = await this.auth.createUserWithEmailAndPassword(email as string, password as string)
-      await this.db.collection('users').add({
-        name: this.registerForm.value.name,
-        email: this.registerForm.value.email,
-        password: this.registerForm.value.email,
-        phoneNumber: this.registerForm.value
-      })
-      this.alertMessage = 'Success! Your account has been created.'
-      this.alertColor = 'green'
+      await this.auth.createUser(this.registerForm.value as IUser)
+      
     } catch(err) {
       console.log(err)
       this.alertMessage = 'An unexpected error occurred, Try again later.'
@@ -80,6 +72,8 @@ export class RegisterComponent {
       this.inSubmission = false
       return
     } 
+    this.alertMessage = 'Success! Your account has been created.'
+    this.alertColor = 'green'
   } 
 
 }
