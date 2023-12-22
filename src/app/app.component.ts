@@ -5,6 +5,7 @@ import { UserModule } from './user/user.module';
 import { NavComponent } from './nav/nav.component';
 import { AuthModalComponent } from './user/auth-modal/auth-modal.component';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore'
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -16,11 +17,12 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore'
     NavComponent,
     AuthModalComponent,
     AngularFirestoreModule,
-
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-
+ constructor( public auth: AuthService ) {
+  console.log(auth.isAuthenticated$)
+ }
 }
