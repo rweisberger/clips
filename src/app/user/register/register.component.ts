@@ -4,6 +4,8 @@ import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angula
 import { SharedModule } from '../../shared/shared.module';
 import { AuthService } from '../../services/auth.service';
 import IUser from '../../models/user.model';
+import { RegisterValidators } from '../validators/register-validators';
+import { EmailTaken } from '../validators/email-taken';
 
 // the register component is built as a reactive form
 @Component({
@@ -16,7 +18,8 @@ import IUser from '../../models/user.model';
 
 export class RegisterComponent {
   constructor(
-    private auth: AuthService
+    private auth: AuthService,
+    private emailTaken: EmailTaken
     ) {  
     }
   inSubmission = false
@@ -34,7 +37,7 @@ export class RegisterComponent {
     email: new FormControl('', [
       Validators.required,
       Validators.email
-    ]
+    ], [this.emailTaken.validate]
     ),
     age: new FormControl<number | null>(null, [
       Validators.required,
@@ -54,7 +57,8 @@ export class RegisterComponent {
       Validators.minLength(13),
       Validators.maxLength(13)
     ]),
-  })
+  }, [RegisterValidators.match('password', 'confirmPassword')])
+
   async register() {
     // reset the values
     this.showAlert = true 
