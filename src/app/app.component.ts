@@ -7,6 +7,7 @@ import { AuthModalComponent } from './user/auth-modal/auth-modal.component';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore'
 import { AuthService } from './services/auth.service';
 import { ManageComponent } from './video/manage/manage.component';
+import { UploadComponent } from './video/upload/upload.component';
 
 @Component({
   selector: 'app-root',
@@ -18,13 +19,14 @@ import { ManageComponent } from './video/manage/manage.component';
     NavComponent,
     AuthModalComponent,
     AngularFirestoreModule,
-    ManageComponent
+    ManageComponent,
+    UploadComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
  constructor( public auth: AuthService ) {
-  console.log(auth.isAuthenticated$)
+  // console.log(auth.isAuthenticated$)
  }
 }

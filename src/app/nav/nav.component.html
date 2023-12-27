@@ -15,13 +15,21 @@
           </li>
           <ng-template #authLinks>
             <li>
-              <a class="px-2" routerLink="/manage" routerLinkActive="text-indigo-400" [routerLinkActiveOptions]="{ exact: true }">Manage</a>
+              <!-- Using queryParams will automatically add the query when we navigate to manage -->
+              <a class="px-2" 
+                routerLink="/manage" 
+                routerLinkActive="text-indigo-400" 
+                [routerLinkActiveOptions]="{ exact: true }"
+                [queryParams]="{ sort:'1'}"
+              >
+                Manage
+              </a>
             </li>
             <li>
-              <a class="px-2">Upload</a>
+              <a class="px-2" routerLink="/upload" routerLinkActive="text-indigo-400" [routerLinkActiveOptions]="{ exact: true }">Upload</a>
             </li>
             <li>
-              <a class="px-2" (click)="logout($event)">Logout</a>
+              <a class="px-2" (click)="auth.logout($event)">Logout</a>
             </li>
           </ng-template>
           <li>

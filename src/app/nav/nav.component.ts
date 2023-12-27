@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModalService } from '../services/modal.service';
 import { AuthService } from '../services/auth.service';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ManageComponent } from '../video/manage/manage.component';
 
@@ -17,7 +16,6 @@ export class NavComponent {
   constructor(
     public modal: ModalService,
     public auth: AuthService,
-    private afAuth: AngularFireAuth
     ) {
     }
   
@@ -25,11 +23,5 @@ export class NavComponent {
     $event.preventDefault()
 
     this.modal.toggleModal('auth')
-  }
-
-  async logout($event: Event) {
-    $event.preventDefault()
-    
-    await this.afAuth.signOut()
   }
 }
