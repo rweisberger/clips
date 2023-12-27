@@ -4,11 +4,12 @@ import { ModalService } from '../services/modal.service';
 import { AuthService } from '../services/auth.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { ManageComponent } from '../video/manage/manage.component';
 
 @Component({
   selector: 'app-nav',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive], 
+  imports: [CommonModule, RouterLink, RouterLinkActive, ManageComponent], 
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.css'
 })

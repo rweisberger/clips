@@ -6,6 +6,7 @@ import { NavComponent } from './nav/nav.component';
 import { AuthModalComponent } from './user/auth-modal/auth-modal.component';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore'
 import { AuthService } from './services/auth.service';
+import { ManageComponent } from './video/manage/manage.component';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,7 @@ import { AuthService } from './services/auth.service';
     NavComponent,
     AuthModalComponent,
     AngularFirestoreModule,
+    ManageComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
