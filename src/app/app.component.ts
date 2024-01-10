@@ -4,7 +4,8 @@ import { RouterOutlet } from '@angular/router';
 import { UserModule } from './user/user.module';
 import { NavComponent } from './nav/nav.component';
 import { AuthModalComponent } from './user/auth-modal/auth-modal.component';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore'
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AuthService } from './services/auth.service';
 import { ManageComponent } from './video/manage/manage.component';
 import { UploadComponent } from './video/upload/upload.component';
@@ -19,6 +20,7 @@ import { UploadComponent } from './video/upload/upload.component';
     NavComponent,
     AuthModalComponent,
     AngularFirestoreModule,
+    AngularFireStorageModule,
     ManageComponent,
     UploadComponent
   ],
