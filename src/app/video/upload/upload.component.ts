@@ -10,6 +10,7 @@ import { AlertComponent } from '../../shared/alert/alert.component';
 import { last, switchMap } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
+import { ClipService } from '../../services/clip.service';
 
 @Component({
   selector: 'app-upload',
@@ -50,7 +51,8 @@ uploadFileForm = new FormGroup({
   
 constructor(
   private storage: AngularFireStorage,
-  private auth: AngularFireAuth
+  private auth: AngularFireAuth,
+  private clipService: ClipService,
 ) {
   auth.user.subscribe(user => this.user = user)
 }
@@ -72,6 +74,7 @@ constructor(
   }
 
   uploadFile() {
+    this.uploadFileForm.disable()
     this.showAlert = true
     this.alertMessage = 'Please wait! Your clip is being uploaded.'
     this.alertColor = 'blue'
@@ -96,13 +99,16 @@ constructor(
     ).subscribe({
       next: (url) => {
         const clip = {
-          uid: this.user?.uid,
-          displayName: this.user?.displayName,
+          uid: this.user?.uid as string,
+          displayName: this.user?.displayName as string,
           title: this.title.value,
           fileName: `${clipFileName}.mp4`,
           url
         }
+
         console.log(clip)
+        this.clipService.createClip(clip)
+        
         this.alertColor = 'green'
         this.alertMessage = 'Succuss! Your clip is ready to share.'
         this.showPercentage = false
