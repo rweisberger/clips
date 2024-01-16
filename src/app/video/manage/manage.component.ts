@@ -7,16 +7,17 @@ import { EditComponent } from '../edit/edit.component';
 import { ModalService } from '../../services/modal.service';
 
 @Component({
-  selector: 'app-manage',
-  standalone: true,
-  imports: [CommonModule, EditComponent],
-  templateUrl: './manage.component.html',
-  styleUrl: './manage.component.css'
+    selector: 'app-manage',
+    standalone: true,
+    templateUrl: './manage.component.html',
+    styleUrl: './manage.component.css',
+    imports: [CommonModule, EditComponent]
 })
 
 export class ManageComponent implements OnInit {
   videoOrder = '1'
   clips: IClip[] = []
+  activeClip: IClip | null = null 
 
   constructor(
       private router: Router,
@@ -58,7 +59,21 @@ export class ManageComponent implements OnInit {
   openModal($event: Event, clip: IClip) {
     $event.preventDefault()
 
-    this.modal.toggleModal('editClip')
+    this.activeClip = clip
 
+    this.modal.toggleModal('editClip')
+  }
+
+  update($event: IClip) {
+    console.log($event)
+    this.clips.forEach((element, index) => {
+      if(element.docID == $event.docID)
+      this.clips[index].title = $event.title
+    })
+  }
+  deleteClip($event: Event, clip: IClip) {
+    $event.preventDefault()
+
+    this.clipService.deleteClip(clip)
   }
 }
