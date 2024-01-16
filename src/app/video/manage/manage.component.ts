@@ -75,5 +75,13 @@ export class ManageComponent implements OnInit {
     $event.preventDefault()
 
     this.clipService.deleteClip(clip)
+    
+    this.clips.forEach((element, index) => {
+      if(element.docID == clip.docID) {
+        this.clips.splice(index, 1)
+      }
+      
+    }
+    )
   }
 }

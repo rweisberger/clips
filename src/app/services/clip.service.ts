@@ -48,8 +48,11 @@ export class ClipService {
   }
 
   async deleteClip(clip: IClip) {
+    // we must delete the video from storage and from the database
     const clipRef = this.storage.ref(`clips/${clip.fileName}`)
     
     await clipRef.delete()
+
+    await this.clipsCollection.doc(clip.docID).delete()
   }
 }
